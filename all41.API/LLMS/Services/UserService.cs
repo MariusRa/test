@@ -17,7 +17,7 @@ namespace LLMS.Services
        
         public IEnumerable<User> GetAllUsers()
         {
-            return _db.Users.ToList();
+            return _db.Users.Where(u => u.UserRole == "Teacher" || u.UserRole == "Student").ToList();
         }
 
         public User GetById(string userId)

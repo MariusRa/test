@@ -45,15 +45,25 @@ namespace LLMS.Controllers
                 
                 var result = _service.AddNewRequest(request);
                 
-                return Ok(result);
+                if (result != null)
+                {
+                    return Ok(request);
+                }
+                else
+                {
+                    return NotFound();
+                }
+                
             }
-          
+
             return Ok();
+               
         }
 
 
         [HttpGet]
         [Route("Requests")]
+        [Authorize(Roles = "Coordinator")]
         public IEnumerable<Request> GetRequests()
         {
             return _service.GetAllRequests();

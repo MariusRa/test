@@ -1,14 +1,15 @@
 ﻿using LLMS.Models;
 using LLMS.Services;
 using LLMS.viewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace LLMS.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Coordinator")]
     public class ClassroomController : ControllerBase
     {
         private readonly IClassroomService _service;

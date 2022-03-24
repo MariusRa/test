@@ -10,11 +10,8 @@ namespace LLMS.Models
         public string UserEmail { get; set; }
         public string UserRole { get; set; }
 
-        
+        [JsonIgnore]
         public ICollection<Classroom> Classrooms { get; set; }
-
-        //public ICollection<ClassroomUser> UserClassrooms { get; set; }
-
-
+       
     }
 }

@@ -9,7 +9,7 @@ namespace LLMS.DAL
         public DbSet<User> Users { get; set; }
         public DbSet<Request> Requests { get; set; }
         public DbSet<Classroom> Classrooms { get; set; }
-        //public DbSet<ClassroomUser> UserClassrooms { get; set; }
+        
 
         public string DbPath { get; private set; }
 
@@ -33,13 +33,13 @@ namespace LLMS.DAL
                     UserRole = "Coordinator"
                 });
 
-            modelBuilder.Entity<Classroom>().HasMany(x => x.Users)
-                .WithMany(x => x.Classrooms)
+            modelBuilder.Entity<User>().HasMany(x => x.Classrooms)
+                .WithMany(x => x.Users)
                 .UsingEntity<ClassroomUser>(
-                    x => x.HasOne(x => x.User)
-                    .WithMany().HasForeignKey(x => x.UserId),
                     x => x.HasOne(x => x.Classroom)
-                   .WithMany().HasForeignKey(x => x.ClassroomId));
+                    .WithMany().HasForeignKey(x => x.ClassroomId),
+                    x => x.HasOne(x => x.User)
+                   .WithMany().HasForeignKey(x => x.UserId));
         }
     }
 }
